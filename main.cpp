@@ -9,29 +9,27 @@ bool gameOver = false;
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 // Canvas
-int canvasY = 30;
-int canvasX = 50;
+const int canvasY = 20;
+const int canvasX = 50;
 
 void Setup() {
 
 }
 
-// std::cout << "Hello";
-// std::cout << std::endl;
-
 void Draw() {
 	system("clear");
-	for (int i = 0; i < canvasY; i++) {
-		for (int y = 0; y < canvasX; y++) {
-			if (i == 0 || i == canvasY - 2) {
+	for (int y = 0; y <= canvasY; y++) {
+		for (int x = 0; x <= canvasX; x++) {
+			// Draw "#" on the canvas if i and j are either at
+			// their minimum or their maximum.
+			// Otherwise draw " "
+			if (y == 0 || y == canvasY || x == 0 || x == canvasX) {
 				std::cout << "#";
 			} else {
 				std::cout << " ";
 			}
-			// if (y == 3) {
-			// 	std::cout << "#";
-			// }
 		}
+		std::cout << std::endl;
 	}
 }
 
@@ -95,7 +93,6 @@ void controlls() {
 int main() {
 	std::thread parallelThread(controlls);
 	parallelThread.detach();
-
 	Setup();
 	while (!gameOver) {
 		Draw();
